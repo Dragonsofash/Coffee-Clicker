@@ -1,5 +1,5 @@
 # :coffee: Coffee Clicker DOM Homework
-
+Jay's copy
 <hr/>
 
 ## Week 2 Assignment

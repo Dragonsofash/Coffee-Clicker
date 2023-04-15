@@ -2,8 +2,7 @@
 const data = window.data;
 
 // Make your References to the two DOM nodes
-const ;
-const ;
+
 // Create a reference to the element who's ID is 'big_coffee and call it bigCoffee
 const bigCoffee = document.getElementById('big_coffee');
 // Create a reference to the element who's ID is 'producer_container' and call it producerContainer
@@ -37,12 +36,23 @@ function unlockProducers(producers, coffeeCount) {
   // loop through the producers array passed into the function
   // for each producer, if the coffeeCount (passed in) is greater than or equal
   // to half the producer's price, reassign the producers.unlocked property to equal true
+  for (let index in producers) {
+    if (coffeeCount >= (producers[index].price / 2)) {
+      producers[index].unlocked = true;
+      return true;
+    }
+  }
+    return false;
 }
 
 function getUnlockedProducers(data) {
   // use the Array.prototype.filter() method
   // filter through the data.producers property, and return an array with only the producers whose
   // unlocked property is true
+  const result = data.producers.filter(unlockProducers()); 
+    // return data.producers[value.unlocked;
+  ;
+  return result;
 }
 
 // You do not need to edit this function
@@ -83,11 +93,11 @@ function deleteAllChildNodes(parent) {
 
 function renderProducers(data) {
   // call the unlockProducers function and pass it data.producers and data.coffee
-
+    unlockProducers(data.producers, data.coffee);
   // make a reference to the DOM element whose ID is producer_container
-
+    const producerContainer = document.getElementById("producer_container");
   // call the deleteAllChildNodes function and pass it the above producerContainer element
-
+    deleteAllChildNodes(producerContainer);
   // you do not need to edit the following code, but for understanding, this gets the unlocked producers,
   // and for each producer makes a little html div with that producer's info
   getUnlockedProducers(data).forEach((producer) => {
@@ -152,9 +162,9 @@ function buyButtonClick(event, data) {
 function tick(data) {
   // increment the data object's (passed into this function)
   // coffee property by the data.totalCPS amount
-
+    data.coffee += data.totalCPS;
   // call the updateCoffeeView function and pass it the data.coffee property
-
+    updateCoffeeView(data.coffee);
   // call the renderProducers function and pass it the newly updated data object
   renderProducers(data);
 }
@@ -163,9 +173,9 @@ function tick(data) {
 
 // add a 'click' event listener to the bigCoffee element (that you referenced above)
 // the event listener should call the clickCoffee function, and pass in the global data object
-
+    bigCoffee.addEventListener('click', clickCoffee(data));
 // add a 'click' event listener to the element (referenced at the top of the file)
 // the event listener should call the buyButtonClick function and pass it the event, and the global data object
-
+    producerContainer.addEventListener('click', buyButtonClick(data));
 // You do not need to edit this last line. This simple runs your tick function every 1000ms, or 1s
 setInterval(() => tick(data), 1000);
